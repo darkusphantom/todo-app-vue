@@ -3,10 +3,10 @@
     <h1>Todo App</h1>
     <form @submit.prevent="addTodo">
       <input type="text" v-model="newTodo" placeholder="Enter a new task" />
-      <button type="submit">Add</button>
+      <button id="add-todo" type="submit">Add</button>
     </form>
     <ul>
-      <li v-for="(todo, index) in todos" :key="index">
+      <li id="task-list" v-for="(todo, index) in todos" :key="index">
         <input type="checkbox" v-model="todo.done" />
         <span :class="{ done: todo.done }">{{ todo.text }}</span>
         <button @click="removeTodo(index)">Delete</button>

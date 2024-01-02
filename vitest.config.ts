@@ -3,9 +3,8 @@ import Vue from '@vitejs/plugin-vue'
 import Jsx from '@vitejs/plugin-vue-jsx'
 
 export default defineVitestConfig({
-    // pluginss: [Vue(), Jsx()],
-    // test: {
-    //   globals: true,
-      // environment: 'jsdom',
-    // },
+    // plugins: [Vue(), Jsx()],
+    test: {
+      environment: 'happy-dom',
+    },
 })

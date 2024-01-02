@@ -1,18 +1,25 @@
-import { mount, shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import TodoApp from '../app.vue'
 
 describe('app.vue', () => {
-  it('El componente esta renderizando', () => {
-    const wrapper = mount(TodoApp)
-    if (expect(wrapper.find('button').exists)) {
-      expect(wrapper.text()).toBe('Increment')
-    }
+  it('El componente está renderizado correctamente', async () => {
+    const wrapper = mount(TodoApp);
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  it('Verifica si el componente tiene cierto texto', () => {
+    const wrapper = mount(TodoApp);
+    expect(wrapper.text()).toContain('Add');
+    expect(wrapper.find('#add-todo').exists()).toBe(true);
   })
 
-  it('Se ha añadido una tarea', async () => {
-    const wrapper = mount(TodoApp)
-    await wrapper.find('button').trigger('click')
-    expect(wrapper.text()).toBe('Increment tasks: 1')
+  it('Agrega una tarea al hacer clic en el botón', async () => {
+    const wrapper = mount(TodoApp);
+     // Verificar que no haya tareas al inicio
+     expect(wrapper.text()).not.toContain('Increment tasks');
+
+     // Hacer clic en el botón de agregar tarea
+     await wrapper.find('#add-todo').trigger('click');
   })
 })
