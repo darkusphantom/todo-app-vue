@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
         "Nuxt"
-    ]
+    ],
+    "jest.jestCommandLine": ".",
+    "jest.rootPath": "."
 }

@@ -1,4 +1,21 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "extends": "./.nuxt/tsconfig.json",
+  // "compilerOptions": {
+  //   // "target": "esnext",
+  //   "jsx": "preserve",
+  //   // "lib": ["esnext", "dom"],
+  //   // "module": "esnext",
+  //   "moduleResolution": "node",
+  //   "resolveJsonModule": true,
+  //   "strict": true,
+  //   "strictNullChecks": true,
+  //   "declaration": true,
+  //   "inlineSourceMap": true,
+  //   "outDir": "./output",
+  //   "esModuleInterop": true,
+  //   "skipDefaultLibCheck": true,
+  //   "skipLibCheck": true
+  // },
+  // "exclude": ["node_modules"]
 }
