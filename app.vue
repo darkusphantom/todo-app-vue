@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 
 interface Todo {
   text: string;
@@ -27,7 +27,7 @@ interface Todo {
 export default defineComponent({
   name: "TodoApp",
   setup() {
-    // const store = useStore();
+    const store = useStore();
     const newTodo = ref("");
     const todos = ref<Todo[]>([]);
 
@@ -35,7 +35,7 @@ export default defineComponent({
       if (newTodo.value.trim()) {
         todos.value.push({ text: newTodo.value, done: false });
         newTodo.value = "";
-        // store.commit("increment");
+        store.commit("increment");
       }
     };
 
