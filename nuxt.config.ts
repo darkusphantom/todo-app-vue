@@ -19,10 +19,6 @@ export default defineNuxtConfig({
     '@nuxt/test-utils/module'
   ],
 
-  imports: {
-    dirs: ['store']
-  },
-
   // Configuración de los complementos
   plugins: [],
 
