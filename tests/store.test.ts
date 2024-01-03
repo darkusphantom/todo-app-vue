@@ -1,15 +1,27 @@
-import { describe, it, expect } from 'vitest';
-import { mutations } from '../store';
+import { describe, it, expect, beforeEach } from 'vitest';
+import { setActivePinia, createPinia } from 'pinia'
+import { useCounterStore } from '../store/task';
 
-const { increment } = mutations as any
+describe('Store Task', () => {
+    beforeEach(() => {
+        setActivePinia(createPinia())
+    })
 
-describe('Store', () => {
-    it("Verifica si incrementa las tareas", () => {
-        // mock state
-        const state = { count: 0 }
-        // apply mutation
-        increment(state)
-        // assert result
-        expect(state.count).to.equal(1)
+    it('Add tasks', () => {
+        const store = useCounterStore()
+        expect(store.tasks.length).toBe(0)
+        store.addTask({ text: 'test', done: false })
+        expect(store.tasks.length).toBe(1)
+    })
+
+    it('Remove task', () => {
+        const store = useCounterStore()
+        expect(store.tasks.length).toBe(0)
+        store.addTask({ text: 'test', done: false })
+        expect(store.tasks.length).toBe(1)
+        if(store.tasks.length > 0) {
+            store.deleteTask(0)
+        }
+        expect(store.tasks.length).toBe(0)
     })
 });
