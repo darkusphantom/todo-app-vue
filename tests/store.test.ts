@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mutations } from '../store';
 
-const { increment } = mutations
+const { increment } = mutations as any
 
 describe('Store', () => {
     it("Verifica si incrementa las tareas", () => {

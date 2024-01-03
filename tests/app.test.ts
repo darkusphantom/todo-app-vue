@@ -10,7 +10,7 @@ describe('app.vue', () => {
 
   it('Verifica si el componente tiene cierto texto', () => {
     const wrapper = mount(TodoApp);
-    expect(wrapper.text()).toContain('Add');
+    expect(wrapper.text()).toContain('+');
     expect(wrapper.find('#add-todo').exists()).toBe(true);
   })
 

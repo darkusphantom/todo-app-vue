@@ -21,47 +21,34 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed } from "vue";
-import { useStore } from "vuex";
+<script setup lang="ts">
+import { ref } from "vue";
 import type { Task, Todo } from "./src/interface/task.model";
+import { useCounterStore } from './store/task'
 
+const newTodo = ref("");
+const todos = ref<Todo[]>([]);
+const taskStore = useCounterStore()
 
-export default defineComponent({
-  name: "TodoApp",
-  setup() {
-    const store = useStore('todo');
-    const newTodo = ref("");
-    const todos = ref<Todo[]>([]);
+/**
+ * Agrega una nueva tarea a la matriz de tareas y aumenta un contador.
+*/
+const addTodo = (): void => {
+  if (newTodo.value.trim()) {
+    const task: Task = { text: newTodo.value, done: false }
+    todos.value.push(task);
+    newTodo.value = "";
+    taskStore.addTask(task);
+  }
+};
 
-    /**
-     * Agrega una nueva tarea a la matriz de tareas y aumenta un contador.
-    */
-    const addTodo = (): void => {
-      if (newTodo.value.trim()) {
-        const task: Task = { text: newTodo.value, done: false }
-        todos.value.push(task);
-        newTodo.value = "";
-        store.commit("addTask", task);
-      }
-    };
-
-    /**
-     * Elimina un elemento de la lista de tareas pendientes.
-     */
-    const removeTodo = (index: number): void => {
-      todos.value.splice(index, 1);
-      store.commit("decrement");
-    };
-
-    return {
-      newTodo,
-      todos,
-      addTodo,
-      removeTodo,
-    };
-  },
-});
+/**
+ * Elimina un elemento de la lista de tareas pendientes.
+ */
+const removeTodo = (index: number): void => {
+  todos.value.splice(index, 1);
+  taskStore.deleteTask(index);
+};
 </script>
 
 <style lang="scss">
