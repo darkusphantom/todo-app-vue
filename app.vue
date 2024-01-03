@@ -5,7 +5,7 @@
       <!-- <p class="task-count">Total de tareas: {{ todos.length }}</p> -->
       <form class="task-form" @submit.prevent="addTodo">
         <input class="task-input" type="text" v-model="newTodo" placeholder="Enter a new task" />
-        <button id="add-todo" class="btn-add" type="submit">+</button>
+        <button id="add-todo" class="btn-add" type="submit" @click="addTodo">+</button>
       </form>
     </section>
     <ul class="task-list" v-if="todos.length">
@@ -22,33 +22,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
+import type { Task, Todo } from "./src/interface/task.model";
 
-interface Todo {
-  text: string;
-  done: boolean;
-}
 
 export default defineComponent({
   name: "TodoApp",
   setup() {
-    const store = useStore();
+    const store = useStore('todo');
     const newTodo = ref("");
     const todos = ref<Todo[]>([]);
 
-    const addTodo = () => {
+    /**
+     * Agrega una nueva tarea a la matriz de tareas y aumenta un contador.
+    */
+    const addTodo = (): void => {
       if (newTodo.value.trim()) {
-        todos.value.push({ text: newTodo.value, done: false });
+        const task: Task = { text: newTodo.value, done: false }
+        todos.value.push(task);
         newTodo.value = "";
-        // store.commit("increment");
-        // console.log(store.state.count);
+        store.commit("addTask", task);
       }
     };
 
-    const removeTodo = (index: number) => {
+    /**
+     * Elimina un elemento de la lista de tareas pendientes.
+     */
+    const removeTodo = (index: number): void => {
       todos.value.splice(index, 1);
-      // store.commit("decrement");
+      store.commit("decrement");
     };
 
     return {

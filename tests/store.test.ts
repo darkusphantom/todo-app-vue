@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { mutations } from '../store/store'
+import { mutations } from '../store';
 
 const { increment } = mutations
 
